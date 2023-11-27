@@ -5,7 +5,10 @@ import { SunIcon } from '../../assets/general/SunIcon';
 import useDarkMode from 'use-dark-mode';
 
 const ThemeSwitcher = (props: { size: 'sm' | 'md' | 'lg' }) => {
-    const darkMode = useDarkMode(true);
+    const darkModeConfig = {
+        classNameDark: 'dark',
+    };
+    const darkMode = useDarkMode(true, darkModeConfig);
 
     return (
         <Switch

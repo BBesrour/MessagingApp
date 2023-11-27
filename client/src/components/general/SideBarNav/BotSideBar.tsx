@@ -35,52 +35,54 @@ const BotSideBar = () => {
 
     return (
         <>
-            <Listbox
-                aria-label="Select a chat"
-                onAction={(item) => {
-                    console.log(item);
-                }}
-                itemClasses={{
-                    base: 'p-3',
-                }}
-            >
-                <ListboxItem key="settings" textValue={'Settings'}>
-                    <span className={'text-lg'}>Settings</span>
-                </ListboxItem>
-                <ListboxItem
-                    key="mode"
-                    textValue="Switch dark mode"
-                    endContent={<ThemeSwitcher size={'md'} />}
-                    onClick={() => {
-                        darkMode.toggle();
+            <>
+                <Listbox
+                    aria-label="Select a chat"
+                    onAction={(item) => {
+                        console.log(item);
+                    }}
+                    itemClasses={{
+                        base: 'p-3',
                     }}
                 >
-                    <span className={'text-lg'}>Switch dark mode</span>
-                </ListboxItem>
-                <ListboxItem
-                    key="logout"
-                    className={'text-danger'}
-                    color={'danger'}
-                    onPress={() => {
-                        void onLogout();
-                    }}
-                    textValue="Logout"
-                    showDivider
-                >
-                    <span className={'text-lg'}>Logout</span>
-                </ListboxItem>
-            </Listbox>
-            <User
-                name={user?.name ?? 'No name'}
-                description={new Date().toISOString() ?? 'No date'}
-                className="p-4"
-            />
+                    <ListboxItem key="settings" textValue={'Settings'}>
+                        <span className={'text-lg'}>Settings</span>
+                    </ListboxItem>
+                    <ListboxItem
+                        key="mode"
+                        textValue="Switch dark mode"
+                        endContent={<ThemeSwitcher size={'md'} />}
+                        onClick={() => {
+                            darkMode.toggle();
+                        }}
+                    >
+                        <span className={'text-lg'}>Switch dark mode</span>
+                    </ListboxItem>
+                    <ListboxItem
+                        key="logout"
+                        className={'text-danger'}
+                        color={'danger'}
+                        onPress={() => {
+                            void onLogout();
+                        }}
+                        textValue="Logout"
+                        showDivider
+                    >
+                        <span className={'text-lg'}>Logout</span>
+                    </ListboxItem>
+                </Listbox>
+                <User
+                    name={user?.name ?? 'No name'}
+                    description={new Date().toISOString() ?? 'No date'}
+                    className="p-4"
+                />
+            </>
             <ErrorModal
                 isOpen={errorModalOpen}
                 onClose={() => {
                     setErrorModalOpen(false);
                 }}
-                errorMessage={errorMessage}
+                errorMessage={errorMessage ?? 'No error message'}
             />
         </>
     );

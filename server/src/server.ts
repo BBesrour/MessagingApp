@@ -7,6 +7,7 @@ import morgan from 'morgan';
 import hpp from 'hpp';
 import helmet from 'helmet';
 import http from 'http';
+import { Server } from 'socket.io';
 import bodyParser from 'body-parser';
 import { connectDB } from './utils/db';
 import environment from './utils/environment';
@@ -62,6 +63,39 @@ const onListening = (server: http.Server) => (): void => {
 
 // create a server based on our Express application
 const server = http.createServer(app);
+
+// create a new socket.io server
+const io = new Server(server);
+
+io.use((socket, next) => {
+    const email = socket.handshake.auth.email;
+    if (!email) {
+        next(new Error('invalid email'));
+        return;
+    }
+    console.log('email', email);
+    next();
+});
+io.on('connection', (socket) => {
+    console.log('a user connected');
+    socket.on('disconnect', () => {
+        console.log('user disconnected');
+    });
+    const users = [];
+    for (const [id, socket] of io.of('/').sockets) {
+        users.push({
+            userID: id,
+            username: socket.handshake.auth.email,
+        });
+    }
+    socket.emit('users', users);
+    // notify existing users
+    socket.broadcast.emit('user connected', {
+        userID: socket.id,
+        username: socket.handshake.auth.email,
+    });
+});
+
 // add an error handler for anything uncaught by the app
 listenToErrorEvents(server);
 server.on('listening', onListening(server));

@@ -1,6 +1,12 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import { Modal, ModalBody, Button, ModalFooter } from '@nextui-org/react';
+import {
+    Modal,
+    ModalBody,
+    Button,
+    ModalFooter,
+    ModalContent,
+    ModalHeader,
+} from '@nextui-org/react';
 
 interface ErrorModalProps {
     isOpen: boolean;
@@ -11,25 +17,23 @@ interface ErrorModalProps {
 function ErrorModal(props: ErrorModalProps) {
     return (
         <>
-            {ReactDOM.createPortal(
-                <Modal isOpen={props.isOpen} onClose={props.onClose}>
+            <Modal isOpen={props.isOpen} onClose={props.onClose}>
+                <ModalContent>
+                    <ModalHeader>
+                        <h2 className="text-red-600">Error</h2>
+                    </ModalHeader>
                     <ModalBody>
-                        <h2 className="text-xl font-semibold text-red-600 mb-4">
-                            Error
-                        </h2>
-                        <p className="text-gray-700">{props.errorMessage}</p>
+                        <p className={'text-foreground'}>
+                            {props.errorMessage}
+                        </p>
                     </ModalBody>
                     <ModalFooter>
-                        <div className="mt-6 text-right">
-                            <Button onClick={props.onClose} color="danger">
-                                Close
-                            </Button>
-                        </div>
+                        <Button onClick={props.onClose} color="danger">
+                            Close
+                        </Button>
                     </ModalFooter>
-                </Modal>,
-                // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-                document.getElementById('overlay-root')!,
-            )}
+                </ModalContent>
+            </Modal>
         </>
     );
 }

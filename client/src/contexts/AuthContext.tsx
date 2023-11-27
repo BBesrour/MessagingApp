@@ -22,7 +22,6 @@ export const AuthContext = createContext<AuthState>({
     isLoading: false,
 });
 
-// create the context provider
 export const AuthContextProvider = ({ children }: AuthContextProviderType) => {
     const [loggedIn, setLoggedIn] = useState<boolean>(false);
     const [user, setUser] = useState<User>();
