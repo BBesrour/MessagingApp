@@ -11,13 +11,18 @@ import Root from './pages/Root';
 import useDarkMode from 'use-dark-mode';
 import { AuthContextProvider } from './contexts/AuthContext';
 import { checkAuthLoader } from './utils/auth.service';
-import Chat from './components/chat/Chat';
+import ChatWindow from './components/chat/ChatWindow';
 import { SocketContextProvider } from './contexts/SocketContext';
+import { getChatData } from './utils/chat.service';
 
 const RoutesJSX = (
     <>
         <Route path="/" element={<Root />} loader={checkAuthLoader}>
-            <Route index element={<Chat />} />
+            <Route
+                path="chat/:userId"
+                element={<ChatWindow />}
+                loader={getChatData}
+            />
         </Route>
         <Route path="/auth" element={<AuthPage />} />
     </>

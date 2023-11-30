@@ -77,7 +77,7 @@ const io = new Server(server, {
 });
 
 io.use(socketAuthMiddleware);
-io.on('connection', onConnection(io));
+io.on(SocketEvents.CONNECTION, onConnection(io));
 
 // add an error handler for anything uncaught by the app
 listenToErrorEvents(server);

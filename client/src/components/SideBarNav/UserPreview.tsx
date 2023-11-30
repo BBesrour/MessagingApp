@@ -6,11 +6,17 @@ export interface UserPreviewProps {
     user: User;
 }
 
-const UserPreview = (props: UserPreviewProps) => {
+// TODO: Remove this
+export interface UserPreviewPropsTemp {
+    username: string;
+    userId: string;
+}
+
+const UserPreview = (props: UserPreviewPropsTemp) => {
     return (
         <UserNextUI
-            name={props.user.email}
-            description={props.user.createdAt?.toISOString() ?? 'No date'}
+            name={props.username}
+            description={props.userId ?? 'No date'}
         />
     );
 };

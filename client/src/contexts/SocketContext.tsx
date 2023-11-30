@@ -13,14 +13,10 @@ const initializeSocket = (email: string) => {
     socket.auth = { email };
     socket.connect();
 
-    socket.on('connect_error', (err) => {
+    socket.on(SocketEvents.ERROR, (err) => {
         if (err.message === 'invalid username') {
             console.log('invalid username');
         }
-    });
-
-    socket.on('user connected', (user) => {
-        console.log('user connected', user);
     });
 
     socket.onAny((event, ...args) => {

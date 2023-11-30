@@ -1,14 +1,20 @@
 import React from 'react';
 import { Listbox, ListboxItem } from '@nextui-org/react';
 import UserPreview from './UserPreview';
+import { SocketContext } from '../../contexts/SocketContext';
 
-const mockChat = [
-    { email: 'john1@doe.com' },
-    { email: 'john2@doe.com' },
-    { email: 'john3@doe.com' },
-];
-
+type ChatUser = Array<{ userId: string; username: string }>;
 const TopSideBar = () => {
+    const { socket } = React.useContext(SocketContext);
+    const [chatUsers, setChatUsers] = React.useState<ChatUser>([]);
+
+    React.useEffect(() => {
+        socket?.on(SocketEvents.USERS_ONLINE, (users) => {
+            console.log(users);
+            setChatUsers(users);
+        });
+    }, [socket]);
+
     return (
         <Listbox
             aria-label="Select a chat"
@@ -19,10 +25,14 @@ const TopSideBar = () => {
                 base: 'text-lg p-3',
             }}
         >
-            {mockChat.map((user) => {
+            {chatUsers.map((user) => {
                 return (
-                    <ListboxItem key={user.email}>
-                        <UserPreview user={user} />
+                    <ListboxItem key={user.userId}>
+                        <UserPreview
+                            userId={user.userId}
+                            username={user.username}
+                        />{' '}
+                        {/* TODO: Change this to use UserPreviewProps */}
                     </ListboxItem>
                 );
             })}

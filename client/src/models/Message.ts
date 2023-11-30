@@ -5,3 +5,8 @@ export interface Message {
     content?: string;
     sentAt?: Date;
 }
+
+export interface Chat {
+    email: string;
+    messages: Message[];
+}
