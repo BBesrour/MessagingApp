@@ -7,6 +7,7 @@ export interface Message {
 }
 
 export interface Chat {
+    id: string;
     email: string;
     messages: Message[];
 }

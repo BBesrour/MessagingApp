@@ -14,6 +14,7 @@ import environment from './utils/environment';
 import { errorHandler, listenToErrorEvents } from './utils/errorHandler';
 import logger from './utils/logger';
 import { authRouter } from './routes/auth';
+import { SocketEvents } from './socketEvents';
 
 // import socket middlewares
 import { socketAuthMiddleware } from './sockets/socketMiddlewares';

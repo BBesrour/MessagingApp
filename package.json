@@ -17,7 +17,8 @@
   },
   "workspaces": [
     "client",
-    "server"
+    "server",
+    "shared-constants"
   ],
   "dependencies": {
     "@types/node": "^20.5.1",

@@ -2,70 +2,72 @@ import { type Chat } from '../models/Message';
 
 const mockChat: Chat[] = [
     {
-        email: 'john@doe.com',
+        id: '1',
+        email: 'test@test.com',
         messages: [
             {
                 content: 'Hi Jenny, How r u today?',
-                from: 'john@doe.com',
+                from: 'test@test.com',
                 to: 'bilel@test.com',
                 sentAt: new Date(),
             },
             {
                 content: 'am doing great ;D',
-                from: 'john@doe.com',
+                from: 'test@test.com',
                 to: 'bilel@test.com',
                 sentAt: new Date(),
             },
             {
                 content: 'doing fine too ;D was thinking about going for a run',
                 from: 'bilel@test.com',
-                to: 'john@doe.com',
+                to: 'test@test.com',
                 sentAt: new Date(),
             },
             {
                 content: 'was thinking about going for a run',
                 from: 'bilel@test.com',
-                to: 'john@doe.com',
+                to: 'test@test.com',
                 sentAt: new Date(),
             },
             {
                 content: 'sounds great ;D',
-                from: 'john@doe.com',
+                from: 'test@test.com',
                 to: 'bilel@test.com',
                 sentAt: new Date(),
             },
         ],
     },
     {
-        email: 'john2@doe.com',
+        id: '2',
+        email: 'bilel@test.com',
         messages: [
             {
                 content: 'Hi Jenny, How r u today?',
-                from: 'john2@doe.com',
+                from: 'test@test.com',
                 to: 'bilel@test.com',
                 sentAt: new Date(),
             },
             {
                 content: 'am doing great ;D',
-                from: 'john2@doe.com',
+                from: 'test@test.com',
                 to: 'bilel@test.com',
                 sentAt: new Date(),
             },
             {
                 content: 'doing fine too ;D was thinking about going for a run',
                 from: 'bilel@test.com',
-                to: 'john2@doe.com',
+                to: 'test@test.com',
                 sentAt: new Date(),
             },
             {
                 content: 'was thinking about going for a run',
                 from: 'bilel@test.com',
-                to: 'john2@doe.com',
+                to: 'test@test.com',
                 sentAt: new Date(),
             },
             {
                 content: 'sounds great ;D',
-                from: 'john2@doe.com',
+                from: 'test@test.com',
                 to: 'bilel@test.com',
                 sentAt: new Date(),
             },

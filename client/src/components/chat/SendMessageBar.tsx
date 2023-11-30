@@ -2,14 +2,18 @@ import React, { useContext } from 'react';
 import { Button, Textarea } from '@nextui-org/react';
 import { FiSend } from 'react-icons/fi';
 import { SocketContext } from '../../contexts/SocketContext';
+import { SocketEvents } from '../../socketEvents';
 
 const SendMessageBar = () => {
     const [message, setMessage] = React.useState<string>('');
-    const { socket } = useContext(SocketContext);
+    const { socket, selectedChat } = useContext(SocketContext);
 
     const sendMessage = () => {
         if (message) {
-            socket?.emit('message', message);
+            socket?.emit(SocketEvents.MESSAGE, {
+                content: message,
+                to: selectedChat,
+            });
             setMessage('');
         }
     };
