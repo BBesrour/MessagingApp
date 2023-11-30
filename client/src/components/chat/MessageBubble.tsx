@@ -1,21 +1,21 @@
 import React from 'react';
 import { cn, Avatar } from '@nextui-org/react';
 
-interface ChatBubblePropsProps {
+export interface ChatBubbleProps {
     avatar: string;
     messages: string[];
-    side: 'left' | 'right';
+    side: 'right' | 'left';
     GridContainerProps?: Record<string, any>;
     GridItemProps?: Record<string, any>;
     AvatarProps?: Record<string, any>;
     getTypographyProps?: (
         msg: string,
         index: number,
-        props: ChatBubblePropsProps,
+        props: ChatBubbleProps,
     ) => Record<string, any>;
 }
 
-const ChatBubble: React.FC<ChatBubblePropsProps> = ({
+const ChatBubble: React.FC<ChatBubbleProps> = ({
     avatar,
     messages,
     side,
@@ -23,7 +23,7 @@ const ChatBubble: React.FC<ChatBubblePropsProps> = ({
     GridItemProps = {},
     AvatarProps = {},
     getTypographyProps = () => ({}),
-}: ChatBubblePropsProps) => {
+}: ChatBubbleProps) => {
     const attachClass = (index: number) => {
         if (messages.length <= 1) {
             return '';

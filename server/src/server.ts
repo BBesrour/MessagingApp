@@ -14,6 +14,10 @@ import environment from './utils/environment';
 import { errorHandler, listenToErrorEvents } from './utils/errorHandler';
 import logger from './utils/logger';
 import { authRouter } from './routes/auth';
+
+// import socket middlewares
+import { socketAuthMiddleware } from './sockets/socketMiddlewares';
+import { onConnection } from './sockets/eventListeners';
 // TODO: Add types to import below
 // import xss from 'xss-clean';
 
@@ -65,36 +69,15 @@ const onListening = (server: http.Server) => (): void => {
 const server = http.createServer(app);
 
 // create a new socket.io server
-const io = new Server(server);
+const io = new Server(server, {
+    cors: {
+        origin: 'http://localhost:8080',
+        credentials: true,
+    },
+});
 
-io.use((socket, next) => {
-    const email = socket.handshake.auth.email;
-    if (!email) {
-        next(new Error('invalid email'));
-        return;
-    }
-    console.log('email', email);
-    next();
-});
-io.on('connection', (socket) => {
-    console.log('a user connected');
-    socket.on('disconnect', () => {
-        console.log('user disconnected');
-    });
-    const users = [];
-    for (const [id, socket] of io.of('/').sockets) {
-        users.push({
-            userID: id,
-            username: socket.handshake.auth.email,
-        });
-    }
-    socket.emit('users', users);
-    // notify existing users
-    socket.broadcast.emit('user connected', {
-        userID: socket.id,
-        username: socket.handshake.auth.email,
-    });
-});
+io.use(socketAuthMiddleware);
+io.on('connection', onConnection(io));
 
 // add an error handler for anything uncaught by the app
 listenToErrorEvents(server);

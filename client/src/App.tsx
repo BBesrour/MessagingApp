@@ -10,8 +10,9 @@ import AuthPage from './pages/AuthPage';
 import Root from './pages/Root';
 import useDarkMode from 'use-dark-mode';
 import { AuthContextProvider } from './contexts/AuthContext';
-import { checkAuthLoader } from './utils/auth';
-import Chat from './components/general/chat/Chat';
+import { checkAuthLoader } from './utils/auth.service';
+import Chat from './components/chat/Chat';
+import { SocketContextProvider } from './contexts/SocketContext';
 
 const RoutesJSX = (
     <>
@@ -32,13 +33,15 @@ function App() {
     return (
         <NextUIProvider>
             <AuthContextProvider>
-                <main
-                    className={`${
-                        darkMode.value ? 'dark' : ''
-                    } text-foreground bg-background`}
-                >
-                    <RouterProvider router={router} />
-                </main>
+                <SocketContextProvider>
+                    <main
+                        className={`${
+                            darkMode.value ? 'dark' : ''
+                        } text-foreground bg-background`}
+                    >
+                        <RouterProvider router={router} />
+                    </main>
+                </SocketContextProvider>
             </AuthContextProvider>
         </NextUIProvider>
     );

@@ -1,6 +1,6 @@
 import React from 'react';
 import { User as UserNextUI } from '@nextui-org/react';
-import { type User } from '../../../api/collections/auth';
+import { type User } from '../../models/User';
 
 export interface UserPreviewProps {
     user: User;
@@ -9,7 +9,7 @@ export interface UserPreviewProps {
 const UserPreview = (props: UserPreviewProps) => {
     return (
         <UserNextUI
-            name={props.user.name}
+            name={props.user.email}
             description={props.user.createdAt?.toISOString() ?? 'No date'}
         />
     );

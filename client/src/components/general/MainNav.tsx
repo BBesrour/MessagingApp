@@ -1,6 +1,6 @@
 import React from 'react';
-import TopSideBar from './SideBarNav/TopSideBar';
-import BotSideBar from './SideBarNav/BotSideBar';
+import TopSideBar from '../SideBarNav/TopSideBar';
+import BotSideBar from '../SideBarNav/BotSideBar';
 
 function MainPage() {
     return (

@@ -3,21 +3,9 @@ import { Listbox, ListboxItem } from '@nextui-org/react';
 import UserPreview from './UserPreview';
 
 const mockChat = [
-    {
-        id: '1',
-        name: 'John Doe 1',
-        createdAt: new Date(),
-    },
-    {
-        id: '2',
-        name: 'Jane Doe 2',
-        createdAt: new Date(),
-    },
-    {
-        id: '3',
-        name: 'Jane Doe 3',
-        createdAt: new Date(),
-    },
+    { email: 'john1@doe.com' },
+    { email: 'john2@doe.com' },
+    { email: 'john3@doe.com' },
 ];
 
 const TopSideBar = () => {
@@ -33,7 +21,7 @@ const TopSideBar = () => {
         >
             {mockChat.map((user) => {
                 return (
-                    <ListboxItem key={user.id}>
+                    <ListboxItem key={user.email}>
                         <UserPreview user={user} />
                     </ListboxItem>
                 );

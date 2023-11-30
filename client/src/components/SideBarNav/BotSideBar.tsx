@@ -1,16 +1,19 @@
 import React, { useContext, useState } from 'react';
 import { Listbox, ListboxItem, User } from '@nextui-org/react';
-import { AuthContext } from '../../../contexts/AuthContext';
-import ThemeSwitcher from '../ThemeSwitcher';
-import { logout } from '../../../api/collections/auth';
-import ErrorModal from '../ErrorModal';
+import { AuthContext } from '../../contexts/AuthContext';
+import ThemeSwitcher from '../general/ThemeSwitcher';
+import { logout } from '../../api/collections/auth';
+import ErrorModal from '../general/ErrorModal';
 import { AxiosError } from 'axios';
-import { type ApiError } from '../../../api/ApiClient';
+import { type ApiError } from '../../api/ApiClient';
 import { useNavigate } from 'react-router-dom';
 import useDarkMode from 'use-dark-mode';
+import { SocketContext } from '../../contexts/SocketContext';
 
 const BotSideBar = () => {
     const { user, setLoggedIn, setUser } = useContext(AuthContext);
+    const { socket } = useContext(SocketContext);
+
     const navigate = useNavigate();
     const darkMode = useDarkMode(true);
 
@@ -33,6 +36,10 @@ const BotSideBar = () => {
         }
     };
 
+    const onDisconnect = () => {
+        socket?.disconnect();
+    };
+
     return (
         <>
             <>
@@ -45,6 +52,16 @@ const BotSideBar = () => {
                         base: 'p-3',
                     }}
                 >
+                    <ListboxItem
+                        key="disconnect"
+                        textValue={'Disconnect'}
+                        color={'danger'}
+                        onClick={() => {
+                            onDisconnect();
+                        }}
+                    >
+                        <span className={'text-lg'}>Disconnect</span>
+                    </ListboxItem>
                     <ListboxItem key="settings" textValue={'Settings'}>
                         <span className={'text-lg'}>Settings</span>
                     </ListboxItem>

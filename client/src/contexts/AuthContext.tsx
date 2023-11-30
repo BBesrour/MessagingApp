@@ -1,7 +1,8 @@
 import React, { createContext, useEffect, useState } from 'react';
-import { verify, type User } from '../api/collections/auth';
+import { verify } from '../api/collections/auth';
+import { type User } from '../models/User';
 
-export interface AuthState {
+export interface AuthContextState {
     loggedIn: boolean;
     user: User | undefined;
     setLoggedIn: (status: boolean) => void;
@@ -14,7 +15,7 @@ export interface AuthContextProviderType {
 }
 
 // create the context with its "features"
-export const AuthContext = createContext<AuthState>({
+export const AuthContext = createContext<AuthContextState>({
     loggedIn: false,
     user: undefined,
     setLoggedIn: () => null,

@@ -1,13 +1,5 @@
 import { ApiClient } from '../ApiClient';
-
-export interface User {
-    _id?: string;
-    name?: string;
-    email?: string;
-    password?: string;
-    role?: string;
-    createdAt?: Date;
-}
+import { type User } from '../../models/User';
 
 const apiClient = new ApiClient();
 

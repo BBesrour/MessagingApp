@@ -1,8 +1,19 @@
+import React, { useContext } from 'react';
 import { Button, Textarea } from '@nextui-org/react';
 import { FiSend } from 'react-icons/fi';
-import React from 'react';
+import { SocketContext } from '../../contexts/SocketContext';
 
 const SendMessageBar = () => {
+    const [message, setMessage] = React.useState<string>('');
+    const { socket } = useContext(SocketContext);
+
+    const sendMessage = () => {
+        if (message) {
+            socket?.emit('message', message);
+            setMessage('');
+        }
+    };
+
     return (
         <div className="flex flex-grow-0 gap-4">
             <Textarea
@@ -14,6 +25,10 @@ const SendMessageBar = () => {
                 }}
                 variant="bordered"
                 placeholder="Enter your message here"
+                value={message}
+                onChange={(e) => {
+                    setMessage(e.target.value);
+                }}
             />
             <Button
                 isIconOnly
@@ -21,6 +36,7 @@ const SendMessageBar = () => {
                 variant="solid"
                 aria-label="Take a photo"
                 className="h-full"
+                onClick={sendMessage}
             >
                 <FiSend />
             </Button>
