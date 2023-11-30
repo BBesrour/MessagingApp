@@ -11,6 +11,7 @@ const SendMessageBar = () => {
     const sendMessage = () => {
         if (message) {
             socket?.emit(SocketEvents.MESSAGE, {
+                // TODO: Fix this, remove inline type
                 content: message,
                 to: selectedChat,
             });

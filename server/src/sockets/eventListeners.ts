@@ -14,6 +14,7 @@ export const listenToSocketEvents = (io: Server, socket: Socket): void => {
     };
 
     const handleMessage = (data: { content: string; to: string }) => {
+        // TODO: Fix this, remove inline type
         logger.debug(
             `Emitting ${SocketEvents.MESSAGE}`,
             data,
@@ -21,6 +22,7 @@ export const listenToSocketEvents = (io: Server, socket: Socket): void => {
             socket.handshake.auth.email,
         );
         io.to(data.to).emit(SocketEvents.MESSAGE, {
+            // TODO: Fix this, remove inline type
             content: data.content,
             from: socket.id,
             fromEmail: socket.handshake.auth.email,

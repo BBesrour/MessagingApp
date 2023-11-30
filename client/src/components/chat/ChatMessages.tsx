@@ -19,6 +19,7 @@ const ChatMessages = (props: ChatMessagesProps) => {
 
     const handleNewMessage = useCallback(
         (message: { content: string; from: string; fromEmail: string }) => {
+            // TODO: Fix this, remove inline type
             console.log(message);
             const newMessage: Message = {
                 to: user?.email,
